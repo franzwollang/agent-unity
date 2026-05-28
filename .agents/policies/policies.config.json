@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "banners": {
+    "generated": "DO NOT EDIT. Generated from .agents/policies/. Edit policy fragments, then run `pnpm build`.",
+    "policySource": ".agents/policies/"
+  },
+  "slots": {
+    "prelude": {
+      "supportedBy": ["cursor-rule", "claude-doc", "claude-rule", "agents-doc", "gemini-doc", "github-copilot", "plain-markdown"]
+    },
+    "body": {
+      "supportedBy": ["cursor-rule", "claude-doc", "claude-rule", "agents-doc", "gemini-doc", "github-copilot", "plain-markdown"]
+    },
+    "commands": {
+      "supportedBy": ["claude-doc", "claude-rule", "agents-doc", "gemini-doc", "github-copilot", "plain-markdown"]
+    },
+    "notes": {
+      "supportedBy": ["claude-doc", "claude-rule", "agents-doc", "gemini-doc", "github-copilot", "plain-markdown"]
+    }
+  },
+  "targets": {
+    "cursor-rule": {
+      "kind": "cursor-rule",
+      "fileExtension": ".mdc",
+      "bannerStyle": "html-comment-after-frontmatter"
+    },
+    "claude-doc": {
+      "kind": "claude-doc",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    },
+    "claude-rule": {
+      "kind": "claude-rule",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    },
+    "agents-doc": {
+      "kind": "agents-doc",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    },
+    "gemini-doc": {
+      "kind": "gemini-doc",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    },
+    "github-copilot": {
+      "kind": "github-copilot",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    },
+    "plain-markdown": {
+      "kind": "plain-markdown",
+      "fileExtension": ".md",
+      "bannerStyle": "html-comment-top"
+    }
+  },
+  "validation": {
+    "requireFrontmatter": true,
+    "requireUniqueIds": "per-module",
+    "forbidUnknownFrontmatterFields": true,
+    "failOnEmptyTargetSet": true,
+    "failOnUnknownSlot": true,
+    "failOnUnknownTarget": true,
+    "failOnRequiresCycle": true
+  },
+  "compose": {
+    "alwaysInclude": ["global"],
+    "globalSlotInjection": {
+      "prelude": "first"
+    }
+  }
+}

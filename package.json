@@ -1,0 +1,69 @@
+{
+  "name": "agent-unity",
+  "version": "0.1.0",
+  "description": "Reusable CLI and library for unifying agent policy content into harness-specific outputs.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Franz Wollang <7851821+franzwollang@users.noreply.github.com>",
+  "homepage": "https://github.com/franzwollang/agent-unity#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franzwollang/agent-unity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/franzwollang/agent-unity/issues",
+    "email": "7851821+franzwollang@users.noreply.github.com"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "bin": {
+    "agent-unity": "./bin/agent-unity.js"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsx build.ts build",
+    "check": "tsx build.ts check",
+    "test": "vitest run",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepack": "pnpm compile"
+  },
+  "keywords": [
+    "agents",
+    "cli",
+    "copilot",
+    "cursor",
+    "gemini",
+    "policy"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "eta": "^3.5.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "picocolors": "^1.1.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

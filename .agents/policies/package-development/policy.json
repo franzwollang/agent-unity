@@ -1,0 +1,25 @@
+{
+  "id": "package-development",
+  "title": "Package Development",
+  "fragmentDiscovery": "implicit-siblings",
+  "ignore": [],
+  "outputs": [
+    {
+      "target": "cursor-rule",
+      "out": ".cursor/rules/package.mdc",
+      "frontmatter": {
+        "description": "agent-unity package development guidance",
+        "alwaysApply": true
+      }
+    },
+    {
+      "target": "claude-rule",
+      "out": ".claude/rules/package.md",
+      "title": "Package Rules"
+    }
+  ],
+  "defaults": {
+    "targets": ["cursor-rule", "claude-rule", "plain-markdown"],
+    "slot": "body"
+  }
+}

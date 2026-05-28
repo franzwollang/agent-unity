@@ -1,0 +1,14 @@
+{
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.expand": false,
+	"explorer.fileNesting.patterns": {
+		"AGENTS.md": "CLAUDE.md, GEMINI.md"
+	},
+	"files.exclude": {
+		"**/.claude": true,
+		"**/.cursor": true,
+		"CLAUDE.md": true,
+		"GEMINI.md": true
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
+}

@@ -1,0 +1,12 @@
+---
+<%= it.frontmatterBlock %>
+---
+
+<%~ it.banner %>
+
+<% if (it.emitTitle) { %>
+# <%= it.module.title %>
+
+<% } %>
+<%~ it.renderedBody %>
+

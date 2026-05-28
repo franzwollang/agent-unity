@@ -1,0 +1,36 @@
+{
+  "id": "root-agent-unity",
+  "title": "agent-unity",
+  "fragmentDiscovery": "implicit-siblings",
+  "ignore": [],
+  "outputs": [
+    {
+      "target": "agents-doc",
+      "out": "AGENTS.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "claude-doc",
+      "out": "CLAUDE.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "gemini-doc",
+      "out": "GEMINI.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "github-copilot",
+      "out": ".github/copilot-instructions.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    }
+  ],
+  "defaults": {
+    "targets": ["claude-doc", "agents-doc", "gemini-doc", "github-copilot", "plain-markdown"],
+    "slot": "body"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "render-samples",
+  "title": "Render Samples",
+  "fragmentDiscovery": "implicit-siblings",
+  "ignore": [],
+  "outputs": [
+    {
+      "target": "cursor-rule",
+      "out": ".cursor/rules/sample.mdc",
+      "frontmatter": {
+        "description": "Sample cursor rule",
+        "alwaysApply": true
+      }
+    },
+    {
+      "target": "claude-rule",
+      "out": ".claude/rules/sample.md",
+      "title": "Sample Claude Rule"
+    },
+    {
+      "target": "agents-doc",
+      "out": "AGENTS.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "claude-doc",
+      "out": "CLAUDE.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "gemini-doc",
+      "out": "GEMINI.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "github-copilot",
+      "out": ".github/copilot-instructions.md",
+      "emitTitle": false,
+      "include": [{ "module": "self" }]
+    },
+    {
+      "target": "copilot-scoped",
+      "out": ".github/instructions/sample.instructions.md",
+      "frontmatter": {
+        "applyTo": "**/*.ts",
+        "description": "Sample scoped Copilot instructions"
+      }
+    },
+    {
+      "target": "plain-markdown",
+      "out": "docs/sample.md",
+      "title": "Plain Markdown Sample"
+    }
+  ],
+  "defaults": {
+    "targets": [
+      "cursor-rule",
+      "claude-rule",
+      "agents-doc",
+      "claude-doc",
+      "gemini-doc",
+      "github-copilot",
+      "copilot-scoped",
+      "plain-markdown"
+    ],
+    "slot": "body"
+  }
+}
