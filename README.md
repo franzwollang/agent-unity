@@ -73,12 +73,21 @@ Releases are published to npm by `.github/workflows/release.yml`. The workflow
 runs on pushes of `v*` tags and can also be dispatched manually. It requires an
 `NPM_TOKEN` repository secret with publish rights for the `agent-unity` package.
 
-- `push` on `v*` tags is the normal release path. After updating the version in
-  `package.json`, create and push a matching tag such as `v0.1.0`; GitHub
-  Actions will run validation and then publish to npm.
-- `workflow_dispatch` is the manual path from the Actions tab. Use it to verify
-  the release job on demand, including `dry_run: true` when you want to confirm
-  the packaging and npm auth setup without actually publishing.
+- `push` on `v*` tags is the normal release path. The workflow validates that
+  the Git tag matches `package.json`. While the package is still on `0.x`, tag
+  pushes publish under npm's `next` dist-tag; once the version reaches `1.x`,
+  tag pushes publish under `latest`.
+- `workflow_dispatch` is the manual path from the Actions tab. It lets you pick
+  the npm dist-tag explicitly (`next` or `latest`) and supports `dry_run: true`
+  when you want to confirm the packaging and npm auth setup without actually
+  publishing.
+
+For the initial name-claiming prerelease at `0.1.0`, push the matching tag:
+
+```bash
+git tag v0.1.0
+git push origin main --follow-tags
+```
 
 ```bash
 pnpm version patch   # or minor / major

@@ -6,6 +6,14 @@ on:
       - "v*"
   workflow_dispatch:
     inputs:
+      npm_tag:
+        description: "npm dist-tag to publish under"
+        type: choice
+        options:
+          - next
+          - latest
+        required: false
+        default: "next"
       dry_run:
         description: "Run npm publish in --dry-run mode"
         required: false
@@ -47,12 +55,35 @@ jobs:
       - name: Compile distributable files
         run: pnpm compile
 
+      - name: Resolve npm dist-tag
+        id: publish_meta
+        run: |
+          PACKAGE_VERSION="$(node -p "JSON.parse(require('node:fs').readFileSync('package.json', 'utf8')).version")"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            NPM_TAG="${{ inputs.npm_tag }}"
+          elif [[ "$PACKAGE_VERSION" == 0.* ]]; then
+            NPM_TAG="next"
+          else
+            NPM_TAG="latest"
+          fi
+          echo "package_version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "npm_tag=$NPM_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Validate tag matches package version
+        if: github.event_name == 'push'
+        run: |
+          EXPECTED_TAG="v${{ steps.publish_meta.outputs.package_version }}"
+          if [ "${GITHUB_REF_NAME}" != "$EXPECTED_TAG" ]; then
+            echo "Expected pushed tag $EXPECTED_TAG but got ${GITHUB_REF_NAME}."
+            exit 1
+          fi
+
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
-            npm publish --access public --provenance --dry-run
+            npm publish --access public --provenance --tag "${{ steps.publish_meta.outputs.npm_tag }}" --dry-run
           else
-            npm publish --access public --provenance
+            npm publish --access public --provenance --tag "${{ steps.publish_meta.outputs.npm_tag }}"
           fi
